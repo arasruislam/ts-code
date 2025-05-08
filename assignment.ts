@@ -74,3 +74,63 @@ function processValue(value: string | number): number {
 }
 processValue("hello");
 processValue(10);
+
+
+interface Product {
+   name: string;
+   price: number;
+}
+
+function getMostExpensiveProduct(products: Product[]): Product | null {
+   if (products.length === 0) {
+      return null;
+   }
+   return products.reduce((prev, curr) => (prev.price > curr.price ? prev : curr));
+}
+
+const products = [
+  { name: "Pen", price: 10 },
+  { name: "Notebook", price: 25 },
+  { name: "Bag", price: 50 }
+];
+
+getMostExpensiveProduct(products);
+
+
+enum Day {
+   Monday,
+   Tuesday,
+   Wednesday,
+   Thursday,
+   Friday,
+   Saturday,
+   Sunday,
+}
+
+function getDayType(day: Day): string {
+   if (day === Day.Saturday || day === Day.Sunday) {
+      return "Weekend";
+   } else {
+      return "Weekday";
+   }
+}
+
+getDayType(Day.Monday);  
+getDayType(Day.Sunday);
+
+
+async function squareAsync(n: number): Promise<number>{
+   return new Promise((resolve, reject) => {
+      setTimeout(() => {
+         if (n < 0) {
+            reject(new Error("Negative number not allowed"));
+         } else {
+            resolve(n * n);
+         }
+      }, 1000);
+   });
+
+}
+
+squareAsync(4).then(console.log);
+squareAsync(-3).catch(console.error);
